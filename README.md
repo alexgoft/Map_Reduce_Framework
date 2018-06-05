@@ -2,12 +2,12 @@
 
 A MapReduce Framework for a single computer, which is done by creating a single thread for each task. And the goal of this framework is to optimize the processing time of a program by taking advantage of the available cores in our multi-core computer.
 
-## Design Remarks:
+## Design Remarks
 
 All information about the methods in the classes, explained extensively as
 comments in the .cpp and .h.
 
-__Map workers -__
+__Map workers__
 
 We decided to implement a map that will store for every thread
 its id and its corresponding container of <key2,value2>.
@@ -21,13 +21,13 @@ works on that container, we chose to guard every container with a unique mutex.
 (A mutex for every container instead of one mutex in order to increase the
 concurrency).
 
-__Mapping is done as followed -__
+__Mapping is done as followed__
 
 The input list (pairs of <key1,value1>) is iterated from the last index to the
 first, and each thread is given up to CHUNK_OF_TASKS pairs to process
 (send to map() and then to emit2()).
 
-__Shuffler -__
+__Shuffler__
 
 Shuffler's goal is to organize all pairs of <key2,value2> to a container of
 <key2,container<value2>>.
@@ -45,7 +45,7 @@ Shuffler updates ShuffledTasks which is the desired <key2,container<value2>>
 container. (Its a map. every key is key2, and the value is its corresponding
 container<value2>.
 
-__Reduce workers -__
+__Reduce workers__
 
 Exactly as the map workers (exept allocating each worker CHUNK_OF_TASKS pairs of
 <key1,value1> from the input lists, each worker will process up to
