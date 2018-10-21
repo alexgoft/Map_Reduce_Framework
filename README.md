@@ -41,15 +41,14 @@ Single task contains- i) thread's id - shuffler will READ pairs from a container
 that coresponed to this id. ii) indices of <k2,v2> pairs in this container
 that are ready to be processed. 
 
-[This indices are calculated by the thread
-itself- starting index is its container size before adding pairs of
+[This indices are calculated by the thread itself- starting index is its container size before adding pairs of
 <key1,value1> by emit2, and ending index is the size (minus 1) of that container
 after mapping CHUNK_OF_TASKS pairs of <key1,value1> (mapping = eventually
 producing pairs of <key2,value2>)].
 
 Shuffler updates ShuffledTasks which is the desired <key2,container<value2>>
-container. (Its a map. every key is key2, and the value is its corresponding
-container<value2>.
+container (Its a map. every key is key2, and the value is its corresponding
+container<value2>).
 
 __Reduce workers__
 
